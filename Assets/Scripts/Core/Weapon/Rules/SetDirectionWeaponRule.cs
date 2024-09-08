@@ -9,6 +9,8 @@ namespace Core.Weapon.Rules
     {
         private readonly WeaponModel _weaponModel;
         private readonly PlayerModel _playerModel;
+
+        private float OffsetYTarget = 10f;
         
         public SetDirectionWeaponRule(WeaponModel weaponModel, PlayerModel playerModel)
         {
@@ -28,7 +30,7 @@ namespace Core.Weapon.Rules
 
         private void OnUpdatePosition()
         {
-            _weaponModel.SetDirection((Vector2.up + _playerModel.Position).normalized);
+            _weaponModel.SetDirection((OffsetYTarget * Vector2.up + _playerModel.Position).normalized);
         }
     }
 }

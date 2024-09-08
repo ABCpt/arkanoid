@@ -30,7 +30,7 @@ namespace Core.Bricks.Model
             Position = position;
             Row = row;
             
-            Size = _bricksConfig.BrickSize + _bricksConfig.BrickOffset;
+            Size = _bricksConfig.BrickSize + _bricksConfig.BrickOffset / 2f;
 
             UpdateBrickType(brickType);
         }

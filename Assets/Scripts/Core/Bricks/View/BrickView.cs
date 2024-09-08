@@ -40,6 +40,13 @@ namespace Core.Bricks.View
         {
             if (!BrickModel.IsDead)
                 SetColor(BrickModel.BrickSettings.Color);
+            
+            _sequence?.Kill();
+
+            _sequence = DOTween.Sequence()
+                .Join(transform
+                    .DOLocalMoveY(transform.position.y + YOffset, _bricksConfig.DespawnTime * FirstStepPercent)
+                    .SetLoops(2, LoopType.Yoyo));
         }
         
         private void SetPosition()

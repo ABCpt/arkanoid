@@ -8,7 +8,8 @@ namespace Core.Projectile.Model
     public class ProjectileModel
     {
         public event Action UpdatePosition = delegate {  };
-        public Vector2 Position { get; private set; }        
+        public Vector2 Position { get; private set; }   
+        public Vector2 LastPosition { get; private set; }
         public float Radius { get; private set; }        
         public int Damage { get; private set; }
         public float Speed { get; private set; }
@@ -17,7 +18,7 @@ namespace Core.Projectile.Model
         private readonly ProjectileConfig _projectileConfig;
 
         public Vector2 MoveDirection { get; private set; }
-        private Vector2 _lastPosition { get; set; }
+
 
         public ProjectileModel(GameSettings gameSettings)
         {
@@ -49,18 +50,17 @@ namespace Core.Projectile.Model
         public void Reflect(Vector2 normal, Vector2 additionDirection)
         {
             MoveDirection = (Vector2.Reflect(MoveDirection, normal) + additionDirection).normalized;
-            ReflectPosition();
+            ReturnPosition();
         }
 
-        private void ReflectPosition()
+        private void ReturnPosition()
         {
-            Position = _lastPosition;
-            Move();
+            Position = LastPosition;
         }
 
         public void Move()
         {
-            _lastPosition = Position;
+            LastPosition = Position;
             Position += MoveDirection * _projectileConfig.ProjectileSpeed * Time.deltaTime;
             UpdatePosition?.Invoke();
         }

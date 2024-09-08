@@ -57,25 +57,25 @@ namespace Utils
             var maxDistance = 1f;
             var normal = Vector2.one;
 
-            if (Mathf.Abs(projectileModel.Position.x + projectileModel.Radius - rect.xMin) < maxDistance)
+            if (Mathf.Abs(projectileModel.LastPosition.x + projectileModel.Radius - rect.xMin) < maxDistance)
             {
-                maxDistance = Mathf.Abs(projectileModel.Position.x - projectileModel.Radius - rect.xMin);
+                maxDistance = Mathf.Abs(projectileModel.LastPosition.x - projectileModel.Radius - rect.xMin);
                 normal = Vector2.left;
             }
-            if (Mathf.Abs(projectileModel.Position.x - projectileModel.Radius - rect.xMax) < maxDistance)
+            if (Mathf.Abs(projectileModel.LastPosition.x - projectileModel.Radius - rect.xMax) < maxDistance)
             {
-                maxDistance = Mathf.Abs(projectileModel.Position.x + projectileModel.Radius - rect.xMax);
+                maxDistance = Mathf.Abs(projectileModel.LastPosition.x + projectileModel.Radius - rect.xMax);
                 normal = Vector2.right;
             }
-            if (Mathf.Abs(projectileModel.Position.y + projectileModel.Radius - rect.yMin) < maxDistance)
+            if (Mathf.Abs(projectileModel.LastPosition.y + projectileModel.Radius - rect.yMin) < maxDistance)
             {
-                maxDistance = Mathf.Abs(projectileModel.Position.y - projectileModel.Radius - rect.yMin);
-                normal = Vector2.up;
-            }
-            if (Mathf.Abs(projectileModel.Position.y - projectileModel.Radius - rect.yMax) < maxDistance)
-            {
-                maxDistance = Mathf.Abs(projectileModel.Position.y + projectileModel.Radius - rect.yMax);
+                maxDistance = Mathf.Abs(projectileModel.LastPosition.y - projectileModel.Radius - rect.yMin);
                 normal = Vector2.down;
+            }
+            if (Mathf.Abs(projectileModel.LastPosition.y - projectileModel.Radius - rect.yMax) < maxDistance)
+            {
+                maxDistance = Mathf.Abs(projectileModel.LastPosition.y + projectileModel.Radius - rect.yMax);
+                normal = Vector2.up;
             }
 
             return normal;

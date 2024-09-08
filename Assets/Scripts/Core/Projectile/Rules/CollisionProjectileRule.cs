@@ -32,14 +32,13 @@ namespace Core.Projectile.Rules
         {
             foreach (var projectileModel in _projectileService.ProjectileModels)
             {
-                if (BrickCollision(projectileModel))
+                if(BrickCollision(projectileModel))
                     continue;
                 
                 if (PlayerCollision(projectileModel))
                     continue;
 
-                if (WallCollision(projectileModel))
-                    continue;
+                WallCollision(projectileModel);
             }
         }
 
