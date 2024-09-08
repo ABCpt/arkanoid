@@ -36,6 +36,7 @@ namespace Core.Player.Model
             
             var position = Position + direction * _playerConfig.Speed * Time.deltaTime;
             Position = ClampPosition(position);
+            
             UpdatePosition?.Invoke();
         }
 
@@ -82,6 +83,11 @@ namespace Core.Player.Model
 
             return position.x > Position.x - xOffset && position.x < Position.x + xOffset &&
                    position.y > Position.y - yOffset && position.y < Position.y + yOffset;
+        }
+
+        public void Collision()
+        {
+            Move(-LastDirection);
         }
     }
 }

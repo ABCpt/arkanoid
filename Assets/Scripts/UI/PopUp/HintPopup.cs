@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using Core.Level.Model;
 using GameStates;
 using GameStates.States;
@@ -11,6 +13,7 @@ namespace UI.PopUp
    {
       [SerializeField] private Button _startButton;
 
+      private const float DelayBeforeUnpauseSeconds = 0.25f;
       private LevelModel _levelModel;
       
       [Inject]
@@ -44,10 +47,12 @@ namespace UI.PopUp
          _levelModel.SetPause(true);
       }
 
-      private void OnStartButton()
+      private async void OnStartButton()
       {
          Hide();
-         
+
+         await Task.Delay(TimeSpan.FromSeconds(DelayBeforeUnpauseSeconds));
+
          _levelModel.SetPause(false);
       }
    }

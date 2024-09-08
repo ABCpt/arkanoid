@@ -41,6 +41,8 @@ namespace Core.Level.Model
 
         public void StartLevel()
         {
+            SetPause(true);
+            
             _destroyedBrickCount = 0;
 
             LevelGrid = _levelConfig.Levels[LevelNumber].GetLevelGrid();

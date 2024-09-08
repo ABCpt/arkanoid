@@ -79,6 +79,7 @@ namespace Core.Projectile.Rules
                     additionDirection += Vector2.up;
                 
                 _projectileService.ReflectProjectile(projectileModel, normal, additionDirection);
+                _playerModel.Collision();
             }
 
             return isCollision;

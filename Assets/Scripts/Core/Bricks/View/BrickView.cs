@@ -13,7 +13,10 @@ namespace Core.Bricks.View
         [SerializeField] private SpriteRenderer _sprite;
         public BrickModel BrickModel { get; private set; }
 
-        private const float DespawnDelay = 0.16f;
+        private const float YOffset = 0.1f;
+        private const float FirstStepPercent = 0.4f;
+        private const float SecondStepPercent = 0.6f;
+        
         private Sequence _sequence;
 
         private BricksConfig _bricksConfig;
@@ -68,8 +71,11 @@ namespace Core.Bricks.View
                 color = _bricksConfig.RowsColor[BrickModel.Row];
 
             _sequence = DOTween.Sequence()
-                .Append(_sprite.DOColor(color, DespawnDelay * 0.4f).SetEase(Ease.InBounce))
-                .Append(_sprite.DOColor(Color.black, DespawnDelay * 0.6f))
+                .Append(_sprite.DOColor(color, _bricksConfig.DespawnTime * FirstStepPercent).SetEase(Ease.InBounce))
+                .Join(transform
+                    .DOLocalMoveY(transform.position.y + YOffset, _bricksConfig.DespawnTime * FirstStepPercent)
+                    .SetLoops(2, LoopType.Yoyo))
+                .Append(_sprite.DOColor(Color.black, _bricksConfig.DespawnTime * SecondStepPercent))
                 .AppendCallback(() =>
                 {
                     base.OnDespawn(parent);

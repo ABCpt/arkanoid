@@ -16,6 +16,6 @@ namespace Core.Bricks.Data
         [field:SerializeField] public List<BrickSettings> BricksSettingses { get; private set; }
         
         [field:SerializeField] public Color[] RowsColor { get; private set; }
-        
+        [field: SerializeField] public float DespawnTime { get; private set; } = 0.18f;
     }
 }

@@ -43,7 +43,10 @@ MonoBehaviour:
     - {r: 0, g: 0, b: 1, a: 1}
     - {r: 0.5019608, g: 0, b: 1, a: 1}
     - {r: 1, g: 0, b: 1, a: 1}
-    - {r: 1, g: 0, b: 0.33333334, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0.6666667, b: 0, a: 1}
+    - {r: 0.6666666, g: 1, b: 0, a: 1}
+    <DespawnTime>k__BackingField: 0.18
   <LevelConfig>k__BackingField:
     <Levels>k__BackingField:
     - Json: {fileID: 4900000, guid: 63ffe83a9406a4793ad25823c430b834, type: 3}
@@ -55,6 +58,6 @@ MonoBehaviour:
     <WeaponOffset>k__BackingField: {x: 0, y: 0.52}
   <ProjectileConfig>k__BackingField:
     ProjectilePrefab: {fileID: -4614605834616401264, guid: 9e2641db1ff754a819006be9ba09146f, type: 3}
-    <ProjectileSpeed>k__BackingField: 14
+    <ProjectileSpeed>k__BackingField: 12
     <ProjectileDamage>k__BackingField: 1
     <ProjectileRadius>k__BackingField: 0.22

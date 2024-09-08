@@ -48,10 +48,14 @@ namespace Core.Projectile.Model
 
         public void Reflect(Vector2 normal, Vector2 additionDirection)
         {
-            Position = _lastPosition;
-            UpdatePosition?.Invoke();
-            
             MoveDirection = (Vector2.Reflect(MoveDirection, normal) + additionDirection).normalized;
+            ReflectPosition();
+        }
+
+        private void ReflectPosition()
+        {
+            Position = _lastPosition;
+            Move();
         }
 
         public void Move()

@@ -30,7 +30,9 @@ namespace Core.Level.Rules
         private void CheckLost()
         {
             if (_playerModel.IsDead && _gameStateService.CurrentState is EnterGameState)
+            {
                 _gameStateService.SetState<LostGameState>();
+            }
         }
     }
 }
