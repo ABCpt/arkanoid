@@ -83,6 +83,7 @@ namespace Core.Bricks.View
                     .DOLocalMoveY(transform.position.y + YOffset, _bricksConfig.DespawnTime * FirstStepPercent)
                     .SetLoops(2, LoopType.Yoyo))
                 .Append(_sprite.DOColor(Color.black, _bricksConfig.DespawnTime * SecondStepPercent))
+                .Join(transform.DOLocalMoveY(transform.position.y - YOffset, _bricksConfig.DespawnTime * SecondStepPercent).SetEase(Ease.OutSine))
                 .AppendCallback(() =>
                 {
                     base.OnDespawn(parent);
