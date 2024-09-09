@@ -1,0 +1,2 @@
+<h3>Arkanoid Game - Sineys 2024 Hackathon</h3>
+This repository contains the Arkanoid game developed for the Sineys 2024 gamedev hackathon. The game was created using Unity 2022.3.10 and leverages the Zenject framework for Dependency Injection within an MVP (Model-View-Presenter) architecture. Notably, the project avoids using standard colliders on MonoBehaviour, showcasing a custom approach to collision detection and game mechanics.
