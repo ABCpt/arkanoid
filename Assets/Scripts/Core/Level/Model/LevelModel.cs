@@ -58,6 +58,7 @@ namespace Core.Level.Model
             }
             
             UpdateLevel?.Invoke();
+            UpdateScore?.Invoke();
         }
 
         public void SetPause(bool pause)
