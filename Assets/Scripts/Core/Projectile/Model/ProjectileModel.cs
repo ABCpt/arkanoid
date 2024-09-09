@@ -2,6 +2,7 @@ using System;
 using Core.Data;
 using Core.Projectile.Data;
 using UnityEngine;
+using Utils;
 
 namespace Core.Projectile.Model
 {
@@ -49,13 +50,9 @@ namespace Core.Projectile.Model
 
         public void Reflect(Vector2 normal, Vector2 additionDirection)
         {
-            MoveDirection = (Vector2.Reflect(MoveDirection, normal) + additionDirection).normalized;
-            ReturnPosition();
-        }
-
-        private void ReturnPosition()
-        {
-            Position = LastPosition;
+            var newDirection = GameHelper.GetReflection(MoveDirection, normal);
+            
+            MoveDirection = newDirection.y > 0 ? (newDirection + additionDirection).normalized : newDirection;
         }
 
         public void Move()
