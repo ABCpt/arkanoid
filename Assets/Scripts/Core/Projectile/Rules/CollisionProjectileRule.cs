@@ -72,12 +72,15 @@ namespace Core.Projectile.Rules
             {
                 var normal = GameHelper.GetCollisionNormal(projectileModel, rect);
 
-                var additionDirection = (_playerModel.LastDirection + Vector2.zero) / 2f;
+                var isNormalUp = Vector2.Distance(normal, Vector2.up) < 0.01f;
                 
-                if (Mathf.Abs(projectileModel.MoveDirection.x) > 1.5f * Mathf.Abs(projectileModel.MoveDirection.y))
-                    additionDirection += Vector2.up;
-                
-                _projectileService.ReflectProjectile(projectileModel, normal, additionDirection);
+                normal += normal + (isNormalUp ? _playerModel.LastDirection / 2f : Vector2.zero);
+
+                if(isNormalUp)
+                    _projectileService.ReflectProjectile(projectileModel, normal);
+                else
+                    projectileModel.ForceMove(normal);
+
                 _playerModel.Collision();
             }
 

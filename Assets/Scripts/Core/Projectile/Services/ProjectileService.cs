@@ -38,9 +38,9 @@ namespace Core.Projectile.Services
             Despawn?.Invoke();
         }
         
-        public void ReflectProjectile(ProjectileModel projectileModel, Vector2 normal, Vector2 additionDirection = new ())
+        public void ReflectProjectile(ProjectileModel projectileModel, Vector2 normal)
         {
-            projectileModel.Reflect(normal.normalized, additionDirection);
+            projectileModel.Reflect(normal.normalized);
         }
         
         public async void FinishLevel()

@@ -48,17 +48,31 @@ namespace Core.Projectile.Model
             return this;
         }
 
-        public void Reflect(Vector2 normal, Vector2 additionDirection)
+        public void Reflect(Vector2 normal)
         {
             var newDirection = GameHelper.GetReflection(MoveDirection, normal);
             
-            MoveDirection = newDirection.y > 0 ? (newDirection + additionDirection).normalized : newDirection;
+            MoveDirection = newDirection;
+            ReturnPosition();
+        }
+
+        private void ReturnPosition()
+        {
+            Position = LastPosition;
+            UpdatePosition?.Invoke();
         }
 
         public void Move()
         {
             LastPosition = Position;
             Position += MoveDirection * _projectileConfig.ProjectileSpeed * Time.deltaTime;
+            UpdatePosition?.Invoke();
+        }
+        
+        public void ForceMove(Vector2 direction)
+        {
+            Position += direction * _projectileConfig.ProjectileSpeed * Time.deltaTime * 2f;
+            LastPosition = Position;
             UpdatePosition?.Invoke();
         }
     }

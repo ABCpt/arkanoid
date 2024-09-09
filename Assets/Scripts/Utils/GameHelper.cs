@@ -33,7 +33,7 @@ namespace Utils
                 Mathf.Clamp(projectileModel.LastPosition.y, rect.yMin, rect.yMax)
             );
             
-            var normal = (projectileModel.Position - closestPoint).normalized;
+            var normal = (projectileModel.LastPosition - closestPoint).normalized;
             
             if (projectileModel.LastPosition.x < rect.xMin || projectileModel.LastPosition.x > rect.xMax)
                 normal = Vector2.right * Mathf.Sign(projectileModel.LastPosition.x - rect.center.x);

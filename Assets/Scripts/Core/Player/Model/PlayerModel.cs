@@ -75,19 +75,10 @@ namespace Core.Player.Model
             UpdatePosition?.Invoke();
             UpdateHealth?.Invoke();
         }
-        
-        public bool IsCollision(Vector2 position)
-        {
-            var xOffset = _playerConfig.PlayerSize.x / 2f;
-            var yOffset = _playerConfig.PlayerSize.y / 2f;
-
-            return position.x > Position.x - xOffset && position.x < Position.x + xOffset &&
-                   position.y > Position.y - yOffset && position.y < Position.y + yOffset;
-        }
 
         public void Collision()
         {
-            Move(-LastDirection);
+            Move(LastDirection);
         }
     }
 }

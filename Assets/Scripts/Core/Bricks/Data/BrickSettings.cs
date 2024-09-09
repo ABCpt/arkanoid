@@ -1,11 +1,13 @@
 using System;
-using Core.Bricks.Data;
 using UnityEngine;
 
-[Serializable]
-public class BrickSettings
+namespace Core.Bricks.Data
 {
-   public BrickType BrickType;
-   public BrickType NextBrickType;
-   public Color Color;
+   [Serializable]
+   public struct BrickSettings
+   {
+      public BrickType BrickType;
+      public BrickType NextBrickType;
+      public Color Color;
+   }
 }
