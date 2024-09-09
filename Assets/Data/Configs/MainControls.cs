@@ -44,6 +44,15 @@ public partial class @MainControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AnyKey"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""870ed853-271e-4d83-9ae9-e81de9c987e9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -156,6 +165,28 @@ public partial class @MainControls: IInputActionCollection2, IDisposable
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Button"",
+                    ""id"": ""10bd3f10-d307-42ab-b758-07568d51a131"",
+                    ""path"": ""ButtonWithOneModifier(overrideModifiersNeedToBePressedFirst=true)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AnyKey"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""a271ee11-239c-46da-82bc-1af9f5860b44"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AnyKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -194,6 +225,7 @@ public partial class @MainControls: IInputActionCollection2, IDisposable
         m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
         m_Main_Move = m_Main.FindAction("Move", throwIfNotFound: true);
         m_Main_Fire = m_Main.FindAction("Fire", throwIfNotFound: true);
+        m_Main_AnyKey = m_Main.FindAction("AnyKey", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -257,12 +289,14 @@ public partial class @MainControls: IInputActionCollection2, IDisposable
     private List<IMainActions> m_MainActionsCallbackInterfaces = new List<IMainActions>();
     private readonly InputAction m_Main_Move;
     private readonly InputAction m_Main_Fire;
+    private readonly InputAction m_Main_AnyKey;
     public struct MainActions
     {
         private @MainControls m_Wrapper;
         public MainActions(@MainControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Main_Move;
         public InputAction @Fire => m_Wrapper.m_Main_Fire;
+        public InputAction @AnyKey => m_Wrapper.m_Main_AnyKey;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -278,6 +312,9 @@ public partial class @MainControls: IInputActionCollection2, IDisposable
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
+            @AnyKey.started += instance.OnAnyKey;
+            @AnyKey.performed += instance.OnAnyKey;
+            @AnyKey.canceled += instance.OnAnyKey;
         }
 
         private void UnregisterCallbacks(IMainActions instance)
@@ -288,6 +325,9 @@ public partial class @MainControls: IInputActionCollection2, IDisposable
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
+            @AnyKey.started -= instance.OnAnyKey;
+            @AnyKey.performed -= instance.OnAnyKey;
+            @AnyKey.canceled -= instance.OnAnyKey;
         }
 
         public void RemoveCallbacks(IMainActions instance)
@@ -327,5 +367,6 @@ public partial class @MainControls: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnAnyKey(InputAction.CallbackContext context);
     }
 }

@@ -13,6 +13,7 @@ namespace Core.Level.Bootstrap
             Container.BindInterfacesTo<UpdateLevelRule>().AsSingle().NonLazy();
             Container.BindInterfacesTo<WinLevelRule>().AsSingle().NonLazy();
             Container.BindInterfacesTo<LostLevelRule>().AsSingle().NonLazy();
+            Container.BindInterfacesTo<ExitGameRule>().AsSingle().NonLazy();
         }
     }
 }
