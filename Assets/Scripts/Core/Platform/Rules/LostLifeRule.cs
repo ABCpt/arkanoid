@@ -1,17 +1,17 @@
 using Core.Level.Interface;
-using Core.Player.Model;
+using Core.Platform.Model;
 using Core.Projectile.Services;
 
-namespace Core.Player.Rules
+namespace Core.Platform.Rules
 {
     public class LostLifeRule : ILevelStartable, ILevelFinishable
     {
-        private readonly PlayerModel _playerModel;
+        private readonly PlatformModel _platformModel;
         private readonly ProjectileService _projectileService;
 
-        public LostLifeRule(PlayerModel playerModel, ProjectileService projectileService)
+        public LostLifeRule(PlatformModel platformModel, ProjectileService projectileService)
         {
-            _playerModel = playerModel;
+            _platformModel = platformModel;
             _projectileService = projectileService;
         }
 
@@ -27,7 +27,7 @@ namespace Core.Player.Rules
 
         private void OnProjectileDespawn()
         {
-            _playerModel.Damage(1);
+            _platformModel.Damage(1);
         }
     }
 }

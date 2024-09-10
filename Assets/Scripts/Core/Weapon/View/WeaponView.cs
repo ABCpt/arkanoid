@@ -1,4 +1,4 @@
-using Core.Player.Model;
+using Core.Platform.Model;
 using Core.Weapon.Model;
 using UnityEngine;
 using Zenject;

@@ -1,5 +1,5 @@
 using Core.Level.Interface;
-using Core.Player.Model;
+using Core.Platform.Model;
 using Core.Weapon.Model;
 using UnityEngine;
 
@@ -8,29 +8,29 @@ namespace Core.Weapon.Rules
     public class SetDirectionWeaponRule : ILevelStartable, ILevelFinishable
     {
         private readonly WeaponModel _weaponModel;
-        private readonly PlayerModel _playerModel;
+        private readonly PlatformModel _platformModel;
 
         private float OffsetYTarget = 10f;
         
-        public SetDirectionWeaponRule(WeaponModel weaponModel, PlayerModel playerModel)
+        public SetDirectionWeaponRule(WeaponModel weaponModel, PlatformModel platformModel)
         {
             _weaponModel = weaponModel;
-            _playerModel = playerModel;
+            _platformModel = platformModel;
         }
 
         public void StartLevel()
         {
-            _playerModel.UpdatePosition += OnUpdatePosition;
+            _platformModel.UpdatePosition += OnUpdatePosition;
         }
         
         public void FinishLevel()
         {
-            _playerModel.UpdatePosition -= OnUpdatePosition;
+            _platformModel.UpdatePosition -= OnUpdatePosition;
         }
 
         private void OnUpdatePosition()
         {
-            _weaponModel.SetDirection((OffsetYTarget * Vector2.up + _playerModel.Position).normalized);
+            _weaponModel.SetDirection((OffsetYTarget * Vector2.up + _platformModel.Position).normalized);
         }
     }
 }

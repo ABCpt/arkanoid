@@ -1,21 +1,21 @@
 using System;
 using Core.Input.Services;
 using Core.Level.Interface;
-using Core.Player.Model;
+using Core.Platform.Model;
 using UnityEngine;
 
 namespace Core.Input.Rules
 {
     public class MoveInputRule : ILevelUpdatable
     {
-        private readonly PlayerModel _playerModel;
+        private readonly PlatformModel _platformModel;
         private readonly InputControlService _inputControlService;
 
         private IDisposable _updateStream;
 
-        public MoveInputRule(PlayerModel playerModel, InputControlService inputControlService)
+        public MoveInputRule(PlatformModel platformModel, InputControlService inputControlService)
         {
-            _playerModel = playerModel;
+            _platformModel = platformModel;
             _inputControlService = inputControlService;
         }
         
@@ -24,10 +24,10 @@ namespace Core.Input.Rules
             var direction = _inputControlService.GetActions().Move.ReadValue<Vector2>();
 
             if (direction != Vector2.zero)
-                _playerModel.Move(direction);
+                _platformModel.Move(direction);
             else
             {
-                _playerModel.StopMove();
+                _platformModel.StopMove();
             }
         }
     }

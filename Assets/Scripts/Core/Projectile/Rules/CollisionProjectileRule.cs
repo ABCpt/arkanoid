@@ -2,7 +2,7 @@ using Core.Data;
 using Core.Bricks.Services;
 using Core.Level.Data;
 using Core.Level.Interface;
-using Core.Player.Model;
+using Core.Platform.Model;
 using Core.Projectile.Model;
 using Core.Projectile.Services;
 using UnityEngine;
@@ -14,17 +14,17 @@ namespace Core.Projectile.Rules
     {
         private readonly ProjectileService _projectileService;
         private readonly BricksService _bricksService;
-        private readonly PlayerModel _playerModel;
+        private readonly PlatformModel _platformModel;
         private readonly LevelConfig _levelConfig;
 
         private const float WallThickness = 10f;
 
         public CollisionProjectileRule(ProjectileService projectileService, GameSettings gameSettings, 
-            BricksService bricksService, PlayerModel playerModel)
+            BricksService bricksService, PlatformModel platformModel)
         {
             _projectileService = projectileService;
             _bricksService = bricksService;
-            _playerModel = playerModel;
+            _platformModel = platformModel;
             _levelConfig = gameSettings.LevelConfig;
         }
         
@@ -64,7 +64,7 @@ namespace Core.Projectile.Rules
         
         private bool PlayerCollision(ProjectileModel projectileModel)
         {
-            var rect = GameHelper.GetRectByPositionAndSize(_playerModel.Position, _playerModel.Size);
+            var rect = GameHelper.GetRectByPositionAndSize(_platformModel.Position, _platformModel.Size);
             
             var isCollision =  GameHelper.IsProjectileWithRectCollision(projectileModel, rect);
 
@@ -74,14 +74,14 @@ namespace Core.Projectile.Rules
 
                 var isNormalUp = Vector2.Distance(normal, Vector2.up) < 0.01f;
                 
-                normal += normal + (isNormalUp ? _playerModel.LastDirection / 2f : Vector2.zero);
+                normal += normal + (isNormalUp ? _platformModel.LastDirection / 2f : Vector2.zero);
 
                 if(isNormalUp)
                     _projectileService.ReflectProjectile(projectileModel, normal);
                 else
                     projectileModel.ForceMove(normal);
 
-                _playerModel.Collision();
+                _platformModel.Collision();
             }
 
             return isCollision;

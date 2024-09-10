@@ -1,4 +1,4 @@
-using Core.Player.Model;
+using Core.Platform.Model;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -9,24 +9,24 @@ namespace UI.Views
     {
         [SerializeField] private TextMeshProUGUI _health;
 
-        private PlayerModel _playerModel;
+        private PlatformModel _platformModel;
 
         [Inject]
-        public void Construct(PlayerModel playerModel)
+        public void Construct(PlatformModel platformModel)
         {
-            _playerModel = playerModel;
-            _playerModel.UpdateHealth += OnUpdateHealth;
+            _platformModel = platformModel;
+            _platformModel.UpdateHealth += OnUpdateHealth;
             OnUpdateHealth();
         }
 
         private void OnUpdateHealth()
         {
-            _health.text = _playerModel.Health.ToString();
+            _health.text = _platformModel.Health.ToString();
         }
 
         private void OnDestroy()
         {
-            _playerModel.UpdateHealth -= OnUpdateHealth;
+            _platformModel.UpdateHealth -= OnUpdateHealth;
         }
     }
 }

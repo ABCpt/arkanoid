@@ -1,20 +1,20 @@
 using System;
-using Core.Player.Model;
+using Core.Platform.Model;
 using UnityEngine;
 using Zenject;
 
-namespace Core.Player.View
+namespace Core.Platform.View
 {
-    public class PlayerView : MonoBehaviour
+    public class PlatformView : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
         
-        private PlayerModel _playerModel;
+        private PlatformModel _platformModel;
         
         [Inject]
-        public void Construct(PlayerModel playerModel)
+        public void Construct(PlatformModel platformModel)
         {
-            _playerModel = playerModel;
+            _platformModel = platformModel;
         }
 
         public void Awake()
@@ -24,19 +24,19 @@ namespace Core.Player.View
 
         public void OnEnable()
         {
-            _playerModel.UpdatePosition += OnUpdatePosition;
+            _platformModel.UpdatePosition += OnUpdatePosition;
             _spriteRenderer.enabled = true;
         }
 
         public void OnDisable()
         {
-            _playerModel.UpdatePosition -= OnUpdatePosition;
+            _platformModel.UpdatePosition -= OnUpdatePosition;
             _spriteRenderer.enabled = false;
         }
         
         private void OnUpdatePosition()
         {
-            transform.position = _playerModel.Position;
+            transform.position = _platformModel.Position;
         }
     }
 }

@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 2115846645933689904}
   - component: {fileID: 2807897442955674703}
   m_Layer: 0
-  m_Name: PlayerView
+  m_Name: PlatformView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

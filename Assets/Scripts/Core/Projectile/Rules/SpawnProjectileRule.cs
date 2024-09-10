@@ -1,6 +1,6 @@
 using System;
 using Core.Level.Interface;
-using Core.Player.Model;
+using Core.Platform.Model;
 using Core.Projectile.Services;
 using Core.Weapon.Model;
 using UnityEngine;
@@ -11,16 +11,16 @@ namespace Core.Projectile.Rules
     {
         private readonly ProjectileService _projectileService;
         private readonly WeaponModel _weaponModel;
-        private readonly PlayerModel _playerModel;
+        private readonly PlatformModel _platformModel;
 
         private IDisposable _spawnStream;
         private float _spawnTime;
 
         public SpawnProjectileRule(ProjectileService projectileService, 
-            WeaponModel weaponModel, PlayerModel playerModel)
+            WeaponModel weaponModel, PlatformModel platformModel)
         {
             _projectileService = projectileService;
-            _playerModel = playerModel;
+            _platformModel = platformModel;
             _weaponModel = weaponModel;
         }
 
@@ -31,7 +31,7 @@ namespace Core.Projectile.Rules
 
         private void SpawnProjectile(Vector2 targetPosition)
         {
-            _projectileService.SpawnProjectile(_playerModel.Position + _weaponModel.WeaponOffset, targetPosition);
+            _projectileService.SpawnProjectile(_platformModel.Position + _weaponModel.WeaponOffset, targetPosition);
         }
 
         public void FinishLevel()

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ca04e88b64f444c94bb5e279754b6a, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  <PlayerConfig>k__BackingField:
+  <PlatformConfig>k__BackingField:
     <Health>k__BackingField: 3
     <Speed>k__BackingField: 10
     <StartPosition>k__BackingField: {x: 0, y: -8, z: -1}
-    <PlayerSize>k__BackingField: {x: 3, y: 0.5}
+    <PlatformSize>k__BackingField: {x: 3, y: 0.5}
   <BricksConfig>k__BackingField:
     <BrickPrefab>k__BackingField: {fileID: 2151868184677592345, guid: 420271c0fd2d44e2389bf60161839467, type: 3}
     <BrickSize>k__BackingField: {x: 1, y: 0.6}

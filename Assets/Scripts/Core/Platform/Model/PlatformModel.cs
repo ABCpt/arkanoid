@@ -2,12 +2,12 @@ using System;
 using Core.Data;
 using Core.Level.Data;
 using Core.Level.Interface;
-using Core.Player.Data;
+using Core.Platform.Data;
 using UnityEngine;
 
-namespace Core.Player.Model
+namespace Core.Platform.Model
 {
-    public class PlayerModel : ILevelStartable
+    public class PlatformModel : ILevelStartable
     {
         public event Action UpdatePosition = delegate {  };
         public event Action UpdateHealth = delegate {  };
@@ -18,15 +18,15 @@ namespace Core.Player.Model
         public bool IsDead => Health <= 0;
         public Vector2 LastDirection { get; private set; }
         
-        private readonly PlayerConfig _playerConfig;
+        private readonly PlatformConfig _platformConfig;
         private readonly LevelConfig _levelConfig;
 
-        public PlayerModel(GameSettings gameSettings)
+        public PlatformModel(GameSettings gameSettings)
         {
-            _playerConfig = gameSettings.PlayerConfig;
+            _platformConfig = gameSettings.PlatformConfig;
             _levelConfig = gameSettings.LevelConfig;
 
-            Size = _playerConfig.PlayerSize;
+            Size = _platformConfig.PlatformSize;
         }
 
         public void Move(Vector2 direction)
@@ -34,7 +34,7 @@ namespace Core.Player.Model
             direction *= Vector2.right;
             LastDirection = direction.normalized;
             
-            var position = Position + direction * _playerConfig.Speed * Time.deltaTime;
+            var position = Position + direction * _platformConfig.Speed * Time.deltaTime;
             Position = ClampPosition(position);
             
             UpdatePosition?.Invoke();
@@ -50,8 +50,8 @@ namespace Core.Player.Model
             var correctPosition = Vector2.zero;
             
             correctPosition.x = Mathf.Clamp(position.x, 
-                -_levelConfig.CameraSize * _levelConfig.FieldAspectRatio + _playerConfig.PlayerSize.x / 2, 
-                _levelConfig.CameraSize * _levelConfig.FieldAspectRatio - _playerConfig.PlayerSize.x / 2);
+                -_levelConfig.CameraSize * _levelConfig.FieldAspectRatio + _platformConfig.PlatformSize.x / 2, 
+                _levelConfig.CameraSize * _levelConfig.FieldAspectRatio - _platformConfig.PlatformSize.x / 2);
 
             correctPosition.y = position.y; 
             
@@ -69,8 +69,8 @@ namespace Core.Player.Model
 
         public void StartLevel()
         {
-            Position = _playerConfig.StartPosition;
-            Health = _playerConfig.Health;
+            Position = _platformConfig.StartPosition;
+            Health = _platformConfig.Health;
             
             UpdatePosition?.Invoke();
             UpdateHealth?.Invoke();

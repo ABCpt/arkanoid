@@ -1,5 +1,5 @@
 using System;
-using Core.Player.Model;
+using Core.Platform.Model;
 using GameStates;
 using GameStates.States;
 using Zenject;
@@ -8,28 +8,28 @@ namespace Core.Level.Rules
 {
     public class LostLevelRule : IInitializable, IDisposable
     {
-        private readonly PlayerModel _playerModel;
+        private readonly PlatformModel _platformModel;
         private readonly GameStateService _gameStateService;
         
-        public LostLevelRule(PlayerModel playerModel, GameStateService gameStateService)
+        public LostLevelRule(PlatformModel platformModel, GameStateService gameStateService)
         {
-            _playerModel = playerModel;
+            _platformModel = platformModel;
             _gameStateService = gameStateService;
         }
         
         public void Initialize()
         {
-            _playerModel.UpdateHealth += CheckLost;
+            _platformModel.UpdateHealth += CheckLost;
         }
 
         public void Dispose()
         {
-            _playerModel.UpdateHealth -= CheckLost;
+            _platformModel.UpdateHealth -= CheckLost;
         }
 
         private void CheckLost()
         {
-            if (_playerModel.IsDead && _gameStateService.CurrentState is EnterGameState)
+            if (_platformModel.IsDead && _gameStateService.CurrentState is EnterGameState)
             {
                 _gameStateService.SetState<LostGameState>();
             }
